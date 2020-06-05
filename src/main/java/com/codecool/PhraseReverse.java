@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class PhraseReverse {
     public static String reverse(String str){
+
         return new StringBuilder(str).reverse().toString();
     }
 
@@ -21,10 +22,17 @@ public class PhraseReverse {
     }
 
     public static String reverseN(String str, int n){
-        StringBuilder sb = new StringBuilder(str.substring(0, n));
-        sb.reverse();
-        sb.append(str.substring(n, str.length()));
-        return sb.toString();
+        String[] words = str.split(" ");
+        String[] nWords = new String[n];
+        for(int i=0; i<n ; i++){
+            nWords[i]=words[i];
+        }
+        return reverseWords(join(reverseArray(nWords), " "));
+
+//        StringBuilder sb = new StringBuilder(str.substring(n));
+//        sb.reverse();
+//        sb.append(str.substring(n));
+//        return sb.toString();
     }
 
     // helper functions but test these too
@@ -47,11 +55,25 @@ public class PhraseReverse {
     }
 
     public static void main(String[] args){
-        final String str = "this is one long sentence without punctuation";
+        final String str = "this is one long sentence without punctuation This test is not implemented";
+//        final String str = "This test is not implemented";
+        String[] words = str.split(" ");
+        String[] result = reverseArray(words);
+        for(String s: words){
+            System.out.print(s + ",");
+        }
+        System.out.println();
+        for(String s: result){
+            System.out.print(s+ ",");
+        }
+        System.out.println();
+
+        String sss= join(words, " ");
+        System.out.println(sss);
 
         System.out.println("Straight-up reversed: " + reverse(str));
         System.out.println("Reversed words: " + reverseWords(str));
         System.out.println("Reversed word order: " + reverseWordOrder(str));
-        System.out.println("Reverse first 5: " + reverseN(str, 5));
+        System.out.println("Reverse first 5: " + reverseN(str, 10));
     }
 }
